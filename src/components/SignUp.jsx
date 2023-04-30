@@ -1,8 +1,9 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "./Header/Navbar";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -10,11 +11,20 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // sign up func
+  const { userSignUp } = useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(
-      `First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}, Password: ${password}`
-    );
+    userSignUp(email, password)
+      .then((result) => {
+        // console.log(result.user);
+        setEmail("");
+        setFirstName("");
+        setLastName("");
+        setPassword("");
+      })
+      .catch((error) => console.log(error.message));
   };
   return (
     <>
@@ -28,29 +38,30 @@ const SignUp = () => {
             <div className="flex flex-wrap -mx-3 mb-2">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-black font-bold mb-2"
                   htmlFor="firstName"
                 >
                   First Name
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-slate-200 leading-tight focus:outline-none focus:shadow-outline"
                   id="firstName"
                   type="text"
                   placeholder="First Name"
                   value={firstName}
+                  required
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-black font-bold mb-2"
                   htmlFor="lastName"
                 >
                   Last Name
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-slate-200 leading-tight focus:outline-none focus:shadow-outline"
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
@@ -61,34 +72,33 @@ const SignUp = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-black font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-slate-200 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
               placeholder="Email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-black font-bold mb-2"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-slate-200 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="Password"
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

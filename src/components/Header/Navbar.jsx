@@ -9,7 +9,8 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
-  const { name } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
   return (
     <>
       <nav className="w-full bg-transparent ">
@@ -88,9 +89,11 @@ const Navbar = () => {
                 </li>
               </ul>
               <div className="mt-3 space-y-2 lg:hidden md:hidden">
-                <a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
-                  user
-                </a>
+                {user && (
+                  <a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
+                    {user?.email}
+                  </a>
+                )}
                 <Link
                   to="/signin"
                   className="inline-block w-full px-4 py-2 text-center text-black hover:text-white bg-yellow-500 rounded-md shadow hover:bg-gray-800"
@@ -101,15 +104,23 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden space-x-2 md:inline-block">
-            <a className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
-              {name}
-            </a>
-            <Link
-              to="/signin"
-              className="px-4 py-2 text-black hover:text-white bg-yellow-500 rounded-md shadow hover:bg-gray-800"
-            >
-              Sign in
-            </Link>
+            {user && (
+              <a className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
+                {user?.email}
+              </a>
+            )}
+            {user ? (
+              <button onClick={() => logOut()} className="btn btn-warning">
+                Log out
+              </button>
+            ) : (
+              <Link
+                to="/signin"
+                className="px-4 py-2 text-black hover:text-white bg-yellow-500 rounded-md shadow hover:bg-gray-800"
+              >
+                Sign in
+              </Link>
+            )}
           </div>
         </div>
       </nav>

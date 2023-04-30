@@ -25,7 +25,9 @@ const Home = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-4/5 mx-auto mt-32">
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold">{showActive?.destination}</h1>
+        <h1 className="text-3xl font-bold">
+          {showActive ? showActive?.destination : "Loading..."}
+        </h1>
         <p>{showActive?.description}</p>
         <Link
           className="md:w-3/12 gap-3 button"
