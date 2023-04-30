@@ -1,20 +1,24 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../assets/logo.png";
 import ActiveLink from "../ActiveLink";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const { name } = useContext(AuthContext);
   return (
     <>
       <nav className="w-full bg-transparent ">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <img className="w-24" src={logo} alt="logo" />
-
+              <Link to="/">
+                <img className="w-24" src={logo} alt="logo" />
+              </Link>
               <div className="md:hidden">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -74,32 +78,38 @@ const Navbar = () => {
                   <ActiveLink to="/news">News</ActiveLink>
                 </li>
                 <li className="text-white hover:text-indigo-500">
-                  <ActiveLink to="destination">Destination</ActiveLink>
+                  <ActiveLink to="/destination">Destination</ActiveLink>
                 </li>
                 <li className="text-white hover:text-indigo-500">
-                  <ActiveLink to="blog">Blog</ActiveLink>
+                  <ActiveLink to="/blog">Blog</ActiveLink>
                 </li>
                 <li className="text-white hover:text-indigo-500">
-                  <ActiveLink to="contact">Contact</ActiveLink>
+                  <ActiveLink to="/contact">Contact</ActiveLink>
                 </li>
               </ul>
               <div className="mt-3 space-y-2 lg:hidden md:hidden">
-                <a className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
-                  Sign in
-                </a>
                 <a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
-                  Sign up
+                  user
                 </a>
+                <Link
+                  to="/signin"
+                  className="inline-block w-full px-4 py-2 text-center text-black hover:text-white bg-yellow-500 rounded-md shadow hover:bg-gray-800"
+                >
+                  Sign in
+                </Link>
               </div>
             </div>
           </div>
           <div className="hidden space-x-2 md:inline-block">
-            <a className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
-              Sign in
-            </a>
             <a className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
-              Sign up
+              {name}
             </a>
+            <Link
+              to="/signin"
+              className="px-4 py-2 text-black hover:text-white bg-yellow-500 rounded-md shadow hover:bg-gray-800"
+            >
+              Sign in
+            </Link>
           </div>
         </div>
       </nav>

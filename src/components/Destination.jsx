@@ -10,6 +10,7 @@ const Destination = () => {
   console.log(data);
   return (
     <>
+      <Navbar />
       <div className="md:w-4/5 mx-auto p-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {data && data.map((d) => <DestinationCard key={d.id} data={d} />)}

@@ -11,7 +11,7 @@ const ActiveLink = ({ to, children }) => {
         isPending
           ? "pending"
           : isActive
-          ? "bg-indigo-300 text-black px-3 py-2 rounded-md"
+          ? "bg-yellow-500 text-black px-3 py-2 rounded-md"
           : ""
       }
     >

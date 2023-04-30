@@ -23,12 +23,12 @@ const Carousel = ({ data, setActiveData }) => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         autoplay
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={(e) => setActiveData(e.activeIndex + 1)}
         className="h-3/5 md:h-64 rounded-md border-2 border-yellow-400"
       >
         {data.map((d) => (
-          <SwiperSlide>
+          <SwiperSlide key={d.id}>
             <img className="w-full" src={d.image} alt="" />
           </SwiperSlide>
         ))}
