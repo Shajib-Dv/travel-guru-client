@@ -9,6 +9,8 @@ import Home from "../layout/Home";
 import Booking from "../components/Booking";
 import BookingProcess from "../components/BookingProcess";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 const Router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const Router = createBrowserRouter([
         <BookingProcess />
       </PrivateRoute>
     ),
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
   {
     path: "*",
