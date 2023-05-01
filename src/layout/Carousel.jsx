@@ -18,18 +18,22 @@ const Carousel = ({ data, setActiveData }) => {
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
-        slidesPerView={1}
+        slidesPerView={2}
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         autoplay
         // onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={(e) => setActiveData(e.activeIndex + 1)}
-        className="h-3/5 md:h-64 rounded-md border-2 border-yellow-400"
+        className="h-full"
       >
         {data.map((d) => (
           <SwiperSlide key={d.id}>
-            <img className="w-full" src={d.image} alt="" />
+            <img
+              className="w-full h-full p-5 backdrop-blur-sm bg-transparent  rounded-md "
+              src={d.image}
+              alt=""
+            />
           </SwiperSlide>
         ))}
         ...

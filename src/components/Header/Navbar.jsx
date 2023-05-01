@@ -18,7 +18,11 @@ const Navbar = () => {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link to="/">
-                <img className="w-24" src={logo} alt="logo" />
+                <img
+                  className="w-24 backdrop-blur-md bg-transparent p-2 rounded-sm"
+                  src={logo}
+                  alt="logo"
+                />
               </Link>
               <div className="md:hidden">
                 <button
