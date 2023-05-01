@@ -65,6 +65,7 @@ const SignIn = () => {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div></div>
           </div>
           <div className="flex items-center justify-between">
             <button
