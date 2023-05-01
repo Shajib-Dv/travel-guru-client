@@ -2,12 +2,17 @@
 
 import React, { useContext, useState } from "react";
 import Navbar from "./Header/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  let from = location.state?.from?.pathname || "/";
+
   //sign in func
   const { userSignIn } = useContext(AuthContext);
   const handleSubmit = (event) => {
@@ -17,6 +22,7 @@ const SignIn = () => {
         // console.log(result.user);
         setEmail("");
         setPassword("");
+        navigate(from);
       })
       .catch((error) => console.log(error.message));
   };

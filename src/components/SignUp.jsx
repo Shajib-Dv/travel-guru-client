@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Header/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const SignUp = () => {
@@ -10,12 +10,41 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [passwordErr, setPasswordErr] = useState("");
+  const navigate = useNavigate();
   // sign up func
   const { userSignUp } = useContext(AuthContext);
+  //validation
+
+  useEffect(() => {
+    if (password === "") {
+      setPasswordErr("");
+      return;
+    }
+    if (!/(?=.*?[A-Z])/.test(password)) {
+      setPasswordErr("Please add at least one capital letter");
+      return;
+    } else if (!/(?=.*?[a-z])/.test(password)) {
+      setPasswordErr("Please add at least one small letter");
+      return;
+    } else if (!/(?=.*?[0-9])/.test(password)) {
+      setPasswordErr("Please add one number");
+      return;
+    } else if (password.length < 6) {
+      setPasswordErr("Password must be six char long");
+      return;
+    }
+    setPasswordErr("");
+  }, [password]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setPasswordErr("");
+    //validation
+    if (passwordErr) {
+      return;
+    }
+    //create user
     userSignUp(email, password)
       .then((result) => {
         // console.log(result.user);
@@ -23,9 +52,11 @@ const SignUp = () => {
         setFirstName("");
         setLastName("");
         setPassword("");
+        navigate("/");
       })
       .catch((error) => console.log(error.message));
   };
+
   return (
     <>
       <Navbar />
@@ -101,11 +132,13 @@ const SignUp = () => {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
+            {<p className="text-red-500 pt-2">{passwordErr}</p>}
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-500"
               type="submit"
+              disabled={passwordErr || password === ""}
             >
               Register
             </button>

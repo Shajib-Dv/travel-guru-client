@@ -11,6 +11,9 @@ import BookingProcess from "../components/BookingProcess";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import News from "../components/News";
+import Blog from "../components/Blog";
+import Contact from "../components/Contact";
 
 const Router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/news",
+        element: <News />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/booking/:id",

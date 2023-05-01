@@ -1,14 +1,16 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import Carousel from "./Carousel";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [activeData, setActiveData] = useState(null);
   const [showActive, setShowActive] = useState({});
+  const { setDestinationData } = useContext(AuthContext);
 
   useEffect(() => {
     fetch("https://re-travel-server-shajib-dv.vercel.app/data")
@@ -30,6 +32,7 @@ const Home = () => {
         </h1>
         <p>{showActive?.description}</p>
         <Link
+          onClick={() => setDestinationData(showActive)}
           className="md:w-3/12 gap-3 button"
           to={`/booking/${showActive?.id}`}
         >

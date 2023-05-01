@@ -7,7 +7,7 @@ import Navbar from "./Header/Navbar";
 
 const Destination = () => {
   const data = useLoaderData();
-  console.log(data);
+
   return (
     <>
       <Navbar />

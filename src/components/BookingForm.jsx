@@ -1,7 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const BookingForm = ({ children }) => {
   const [location, setLocation] = useState("");
@@ -27,9 +28,6 @@ const BookingForm = ({ children }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(
-      `Origin: ${location}, Destination: ${category}, Start Date: ${startDate}, End Date: ${endDate}`
-    );
   };
 
   return (
@@ -50,6 +48,7 @@ const BookingForm = ({ children }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="location"
               value={location}
+              required
               onChange={handleLocationChange}
             >
               <option value="" disabled>
@@ -78,6 +77,7 @@ const BookingForm = ({ children }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="category"
               value={category}
+              required
               onChange={handleCategoryChange}
             >
               <option value={children}>{children}</option>
@@ -96,6 +96,7 @@ const BookingForm = ({ children }) => {
                 id="startDate"
                 type="date"
                 value={startDate}
+                required
                 onChange={handleStartDateChange}
               />
             </div>
@@ -111,6 +112,7 @@ const BookingForm = ({ children }) => {
                 id="endDate"
                 type="date"
                 value={endDate}
+                required
                 onChange={handleEndDateChange}
               />
             </div>
